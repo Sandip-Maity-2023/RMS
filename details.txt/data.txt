@@ -4,6 +4,58 @@ manashmaity721447-coder
 PS E:\rms2\rms> git config user.email
 manashmaity721447@gmail.com
 
+https://share.gemini.google/HDIptNkYLuDB
+
+
+rental-management-system/
+├── backend/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── productController.js
+│   │   ├── rentalController.js
+│   │   └── dashboardController.js
+│   ├── middleware/
+│   │   ├── authMiddleware.js
+│   │   └── roleMiddleware.js
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Product.js
+│   │   ├── Pricelist.js
+│   │   ├── RentalOrder.js
+│   │   └── QuotationTemplate.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── productRoutes.js
+│   │   ├── rentalRoutes.js
+│   │   └── dashboardRoutes.js
+│   ├── utils/
+│   │   └── lateFeeCalculator.js
+│   ├── .env
+│   ├── server.js
+│   └── package.json
+└── frontend/
+    ├── src/
+    │   ├── components/
+    │   │   ├── Navbar.jsx
+    │   │   ├── Sidebar.jsx
+    │   │   └── ProtectionRoute.jsx
+    │   ├── pages/
+    │   │   ├── Login.jsx
+    │   │   ├── Register.jsx
+    │   │   ├── ResetPassword.jsx
+    │   │   ├── UserDashboard.jsx
+    │   │   ├── AdminDashboard.jsx
+    │   │   ├── ProductCatalog.jsx
+    │   │   ├── CartCheckout.jsx
+    │   │   └── OrderReturn.jsx
+    │   ├── context/
+    │   │   └── AuthContext.jsx
+    │   ├── App.jsx
+    │   └── main.jsx
+    ├── index.html
+    └── package.json
 
 
 client
