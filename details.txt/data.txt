@@ -60,3 +60,4 @@ rental-management-system/
 
 client
 npm create vite@latest .
+c
