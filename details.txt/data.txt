@@ -1,2 +1,10 @@
+
+PS E:\rms2\rms> git config user.name
+manashmaity721447-coder
+PS E:\rms2\rms> git config user.email
+manashmaity721447@gmail.com
+
+
+
 client
 npm create vite@latest .
