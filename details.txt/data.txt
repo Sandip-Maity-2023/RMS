@@ -60,10 +60,27 @@ rental-management-system/
 
 client
 npm create vite@latest .
+npm install react-router-dom
+npm install axios
+
 
 in root:
 git pull origin main
+git branch
+git status
+git branch -d feature/auth-system (delete the branch)
+
+# 1. Push your feature branch to GitHub
+git push -u origin feature/your-branch-name
+
+# 2. Create the Pull Request
+gh pr create --title "feat: brief description" --body "Detailed explanation of changes"
+
 
 in server:
 npm init -y //for configuration file (package.json)
 npm install express mongoose cors dotenv
+npm install bcryptjs
+npm install jsonwebtoken
+npm install resend
+

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { apiRequest } from '../utils/api';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
@@ -12,12 +12,14 @@ const ResetPassword = () => {
     setError('');
 
     try {
-      //const res = await axios.post('http://localhost:5000/api/auth/reset-password', { email });
-      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/auth/reset-password`, { email });
-      
-      setMessage(res.data.message);
+      const res = await apiRequest('/api/auth/reset-password', {
+        method: 'POST',
+        body: JSON.stringify({ email })
+      });
+
+      setMessage(res.message);
     } catch (err) {
-      setError(err.response?.data?.message || 'Email not found.');
+      setError(err.message || 'Email not found.');
     }
   };
 

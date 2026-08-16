@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { apiRequest } from '../utils/api';
 
 const Register = () => {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '' });
   const [error, setError] = useState('');
   const [coupon, setCoupon] = useState('');
-  const navigate = useNavigate();
-
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
@@ -15,12 +13,14 @@ const Register = () => {
     setError('');
     try {
       
-        //const res = await axios.post('http://localhost:5000/api/auth/register-user', formData);
-        const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/auth/register-user`, formData);
-        
-      setCoupon(res.data.couponCode);
+      const res = await apiRequest('/api/auth/register-user', {
+        method: 'POST',
+        body: JSON.stringify(formData)
+      });
+
+      setCoupon(res.couponCode);
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(err.message || 'Registration failed');
     }
   };
 

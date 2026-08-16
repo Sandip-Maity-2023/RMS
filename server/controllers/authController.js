@@ -1,14 +1,7 @@
-//const User = require('../models/user');
-import User from '../models/user.js';
-
-//const bcrypt = require('bcryptjs');
-import bcrypt from 'bcryptjs';
-
-//const jwt = require('jsonwebtoken');
-import jwt from 'jsonwebtoken';
-
-//const { Resend } = require('resend');
-import { Resend } from 'resend';
+const User = require('../models/user');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { Resend } = require('resend');
 
 
 // Initialize Resend with API Key from environment variables
@@ -21,7 +14,7 @@ const validatePassword = (password) => {
 };
 
 // 1. User Sign-Up
-export const registerUser = async (req, res) => {
+exports.registerUser = async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;
 
   try {
@@ -62,7 +55,7 @@ export const registerUser = async (req, res) => {
 };
 
 // 2. Vendor Sign-Up
-export const registerVendor = async (req, res) => {
+exports.registerVendor = async (req, res) => {
   const { firstName, lastName, companyName, productCategory, gstNo, email, password, confirmPassword } = req.body;
 
   try {
@@ -109,7 +102,7 @@ export const registerVendor = async (req, res) => {
 };
 
 // 3. Login
-export const login = async (req, res) => {
+exports.login = async (req, res) => {
   const { loginId, password } = req.body;
 
   try {
@@ -125,14 +118,22 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET || 'secretkey', { expiresIn: '1d' });
 
-    res.json({ token, user: { id: user._id, firstName: user.firstName, role: user.role } });
+    res.json({
+      token,
+      user: {
+        id: user._id,
+        name: `${user.firstName} ${user.lastName}`.trim(),
+        email: user.email,
+        role: user.role
+      }
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
 // 4. Reset Password using Resend API
-export const resetPassword = async (req, res) => {
+exports.resetPassword = async (req, res) => {
   const { email } = req.body;
 
   try {
@@ -143,8 +144,8 @@ export const resetPassword = async (req, res) => {
 
     // Generate reset token
     const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secretkey', { expiresIn: '15m' });
-   // const resetUrl = `http://localhost:3000/update-password?token=${resetToken}`;
-   const resetUrl=`${import.meta.env.CLIENT_URL}/update-password?token=${resetToken}`;
+    const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+    const resetUrl = `${clientUrl}/update-password?token=${resetToken}`;
 
     // Send email using Resend
     await resend.emails.send({
