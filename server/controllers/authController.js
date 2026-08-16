@@ -1,10 +1,18 @@
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { Resend } = require('resend');
+//const User = require('../models/user');
+import User from '../models/user.js';
+
+//const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
+
+//const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+
+//const { Resend } = require('resend');
+import { Resend } from 'resend';
+
 
 // Initialize Resend with API Key from environment variables
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API);
 
 // Password Validation Rule: 6-12 chars, 1 Upper, 1 Lower, 1 Special (@, $, &, _)
 const validatePassword = (password) => {
@@ -13,7 +21,7 @@ const validatePassword = (password) => {
 };
 
 // 1. User Sign-Up
-exports.registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;
 
   try {
@@ -54,7 +62,7 @@ exports.registerUser = async (req, res) => {
 };
 
 // 2. Vendor Sign-Up
-exports.registerVendor = async (req, res) => {
+export const registerVendor = async (req, res) => {
   const { firstName, lastName, companyName, productCategory, gstNo, email, password, confirmPassword } = req.body;
 
   try {
@@ -101,7 +109,7 @@ exports.registerVendor = async (req, res) => {
 };
 
 // 3. Login
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   const { loginId, password } = req.body;
 
   try {
@@ -124,7 +132,7 @@ exports.login = async (req, res) => {
 };
 
 // 4. Reset Password using Resend API
-exports.resetPassword = async (req, res) => {
+export const resetPassword = async (req, res) => {
   const { email } = req.body;
 
   try {
