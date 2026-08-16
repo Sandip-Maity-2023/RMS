@@ -60,4 +60,10 @@ rental-management-system/
 
 client
 npm create vite@latest .
-c
+
+in root:
+git pull origin main
+
+in server:
+npm init -y //for configuration file (package.json)
+npm install express mongoose cors dotenv
