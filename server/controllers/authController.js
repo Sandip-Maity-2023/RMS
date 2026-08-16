@@ -135,7 +135,8 @@ exports.resetPassword = async (req, res) => {
 
     // Generate reset token
     const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secretkey', { expiresIn: '15m' });
-    const resetUrl = `http://localhost:3000/update-password?token=${resetToken}`;
+   // const resetUrl = `http://localhost:3000/update-password?token=${resetToken}`;
+   const resetUrl=`${import.meta.env.CLIENT_URL}/update-password?token=${resetToken}`;
 
     // Send email using Resend
     await resend.emails.send({
